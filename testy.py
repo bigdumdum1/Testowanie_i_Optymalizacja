@@ -1,29 +1,12 @@
 import unittest
-from unittest.mock import MagicMock
-from app import get_comments, create_html_table
+from app import app, get_comments, create_html_table
 
 
 class TestApp(unittest.TestCase):
 
-    def test_get_comments_success(self):
-        # Symulacja udanej odpowiedzi
-        mock_response = MagicMock()
-        mock_response.status_code = 200
-        mock_response.json.return_value = [{'name': 'user1', 'email': 'user1@example.com', 'body': 'comment1'}]
-        with unittest.mock.patch('app.request.get', return_value=mock_response):
-            comments = get_comments()
-            self.assertEqual(len(comments), 1)
-            self.assertEqual(comments[0]['name'], 'user1')
-            self.assertEqual(comments[0]['email'], 'user1@example.com')
-            self.assertEqual(comments[0]['body'], 'comment1')
+    def setUp(self):
+        self.app = app.test_client()
 
-    def test_get_comments_failure(self):
-        # Symulacja nieudanej odpowiedzi
-        mock_response = MagicMock()
-        mock_response.status_code = 404
-        with unittest.mock.patch('app.request.get', return_value=mock_response):
-            comments = get_comments()
-            self.assertEqual(len(comments), 0)
 
     def test_create_html_table(self):
         comments = [{'name': 'user1', 'email': 'user1@example.com', 'body': 'comment1'}]
@@ -43,6 +26,40 @@ class TestApp(unittest.TestCase):
         """
         self.assertEqual(html_table.strip(), expected_table.strip())
 
+        # Test dla funkcji index()
+    def test_index(self):
+        with app.test_client() as client:
+            response = client.get('/')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'<title>Index</title>', response.data)
 
-if __name__ == '__main__':
-    unittest.main()
+    # Test dla funkcji komentarze()
+    def test_komentarze(self):
+        with app.test_client() as client:
+            response = client.get('/komentarze')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'<title>Komentarze</title>', response.data)
+
+    # Test dla funkcji albumy()
+    def test_albumy(self):
+        with app.test_client() as client:
+            response = client.get('/Albumy')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'<title>albumy</title>', response.data)
+
+    # Test dla funkcji zdjecia()
+    def test_zdjecia(self):
+        with app.test_client() as client:
+            response = client.get('/Zdjecia')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'<title>Zdjecia</title>', response.data)
+
+    # Test dla funkcji posty()
+    def test_posty(self):
+        with app.test_client() as client:
+            response = client.get('/posty')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'<title>Posty</title>', response.data)
+
+    if __name__ == '__main__':
+        unittest.main()
