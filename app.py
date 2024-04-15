@@ -7,17 +7,17 @@ def index():
     return render_template('index.html')
 
 @app.route('/komentarze')
-def page1():
+def komentarze():
     return render_template('komentarze.html')
 
 @app.route('/albumy')
-def page2():
+def albumy():
     return render_template('albumy.html')
 
 @app.route('/zdjecia')
-def page2():
+def zdjecia():
     return render_template('zdjecia.html')
 
 @app.route('/posty')
-def page2():
+def posty():
     return render_template('posty.html')
