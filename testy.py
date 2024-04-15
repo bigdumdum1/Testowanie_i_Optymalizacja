@@ -40,7 +40,7 @@ class TestApp(unittest.TestCase):
             </tr>
         </thead>
         <tbody>
-    
+     
             <tr>
                 <td>user1</td>
                 <td>user1@example.com</td>
