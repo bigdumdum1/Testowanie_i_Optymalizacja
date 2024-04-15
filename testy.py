@@ -1,6 +1,6 @@
 import unittest
 from app import app, get_comments, create_html_table
-
+from html import unescape
 
 class TestApp(unittest.TestCase):
     maxDiff = None
@@ -9,19 +9,32 @@ class TestApp(unittest.TestCase):
 
 
 
-        # Test dla funkcji index()
+        # Test dla funkcji index() czy się otwiera
     def test_index(self):
         with app.test_client() as client:
             response = client.get('/')
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'<title>Index</title>', response.data)
 
-    # Test dla funkcji komentarze()
+    # Test dla funkcji komentarze() czy się otwiera
     def test_komentarze(self):
         with app.test_client() as client:
             response = client.get('/komentarze')
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'<title>Komentarze</title>', response.data)
+
+    #Test dla Index czy działają linki
+    def test_index_links(self):
+        # Testowanie linku do komentarzy
+        response = self.app.get('/')
+        decoded_response = response.data.decode('utf-8')
+        self.assertIn('<a href="komentarze"><button class="large-button"> Komentarze</button></a>', decoded_response)
+        # Testowanie linku do zdjęć
+        self.assertIn('<a href="zdjecia"><button class="large-button">Zdjęcia</button></a>', decoded_response)
+        # Testowanie linku do albumów
+        self.assertIn('<a href="albumy"><button class="large-button">Albumy</button></a>', decoded_response)
+        # Testowanie linku do postów
+        self.assertIn('<a href="posty"><button class="large-button">Posty</button></a>', decoded_response)
 
     # Test dla wyglądu tabeli w albumach()
     def test_albumy_tabela(self):
@@ -53,14 +66,14 @@ class TestApp(unittest.TestCase):
             """
             self.assertEqual(html_table.strip(), expected_table.strip())
 
-    # Test dla funkcji zdjecia()
+    # Test dla funkcji zdjecia() czy się otwiera
     def test_zdjecia(self):
         with app.test_client() as client:
             response = client.get('/Zdjecia')
             self.assertEqual(response.status_code, 404)
             self.assertIn(b'<title>Zdjecia</title>', response.data)
 
-    # Test dla funkcji posty()
+    # Test dla funkcji posty() czy się otwiera
     def test_posty(self):
         with app.test_client() as client:
             response = client.get('/posty')
