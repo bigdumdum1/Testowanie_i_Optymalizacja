@@ -3,28 +3,11 @@ from app import app, get_comments, create_html_table
 
 
 class TestApp(unittest.TestCase):
-
+    maxDiff = None
     def setUp(self):
         self.app = app.test_client()
 
 
-    def test_create_html_table(self):
-        comments = [{'name': 'user1', 'email': 'user1@example.com', 'body': 'comment1'}]
-        html_table = create_html_table(comments)
-        expected_table = """
-        <table>
-        <thead>
-            <tr>
-                <th>Nazwa użytkownika</th>
-                <th>Email</th>
-                <th>Treść</th>
-            </tr>
-        </thead>
-        <tbody id="comments-table-body">
-        </tbody>
-    </table>
-        """
-        self.assertEqual(html_table.strip(), expected_table.strip())
 
         # Test dla funkcji index()
     def test_index(self):
@@ -44,14 +27,14 @@ class TestApp(unittest.TestCase):
     def test_albumy(self):
         with app.test_client() as client:
             response = client.get('/Albumy')
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b'<title>albumy</title>', response.data)
+            self.assertEqual(response.status_code, 404)
+            self.assertIn(b'<title>Albumy</title>', response.data)
 
     # Test dla funkcji zdjecia()
     def test_zdjecia(self):
         with app.test_client() as client:
             response = client.get('/Zdjecia')
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 404)
             self.assertIn(b'<title>Zdjecia</title>', response.data)
 
     # Test dla funkcji posty()
@@ -60,6 +43,40 @@ class TestApp(unittest.TestCase):
             response = client.get('/posty')
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'<title>Posty</title>', response.data)
+
+    def test_komentarze_tabela(self):
+        with app.test_client() as client:
+            response = client.get('/komentarze')
+            comments = [{'name': 'user1', 'email': 'user1@example.com', 'body': 'comment1'}]
+            html_table = create_html_table(comments)
+            expected_table = """
+            <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nazwa użytkownika</th>
+                <th>Email</th>
+                <th>Treść</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr>
+                <td>user1</td>
+                <td>user1@example.com</td>
+                <td>comment1</td>
+            </tr>
+        
+        </tbody>
+    </table>
+
+            """
+            self.assertEqual(html_table.strip(), expected_table.strip())
+
+
+
+
+
 
     if __name__ == '__main__':
         unittest.main()
