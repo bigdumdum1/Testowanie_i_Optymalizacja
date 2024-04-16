@@ -38,14 +38,13 @@ class TestApp(unittest.TestCase):
     # Test dla wyglądu tabeli w albumach()
     def test_albumy_tabela(self):
         with app.test_client() as client:
-            response = client.get('/komentarze')
+            response = client.get('/albumy')
             comments = [{'name': 'user1', 'email': 'user1@example.com', 'body': 'comment1'}]
             html_table = create_html_table(comments)
             expected_table = """
             <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nazwa użytkownika</th>
                 <th>Email</th>
                 <th>Treść</th>
