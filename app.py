@@ -35,7 +35,6 @@ def create_html_table(comments):
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nazwa użytkownika</th>
                 <th>Email</th>
                 <th>Treść</th>

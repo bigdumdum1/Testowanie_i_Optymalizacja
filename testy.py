@@ -1,6 +1,5 @@
 import unittest
-from app import app, get_comments, create_html_table
-from html import unescape
+from app import app, create_html_table
 
 class TestApp(unittest.TestCase):
     maxDiff = None
@@ -91,7 +90,6 @@ class TestApp(unittest.TestCase):
             <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nazwa użytkownika</th>
                 <th>Email</th>
                 <th>Treść</th>
