@@ -24,6 +24,8 @@
     <table>
         <thead>
             <tr>
+                <th>Id</th>
+                <th>Tytuł zdjęcia</th>
                 <th>Zdjęcie</th>
             </tr>
         </thead>
@@ -36,10 +38,12 @@
             .then(response => response.json())
             .then(data => {
                 const tableBody = document.getElementById('comments-table-body');
-                data.forEach(comment => {
+                data.forEach(item => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td><img src="https://via.placeholder.com/100x100" alt="User Image"></td>
+                        <td>${item.id}</td>
+                        <td>${item.title}</td>
+                        <td><img src="${item.url}" alt="${item.title}"></td>
                     `;
                     tableBody.appendChild(row);
                 });

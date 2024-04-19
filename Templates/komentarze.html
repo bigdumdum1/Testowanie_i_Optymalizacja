@@ -20,16 +20,17 @@
     <table>
         <thead>
             <tr>
+                <th>id</th>
                 <th>Nazwa użytkownika</th>
-                <th>Email</th>
-                <th>Treść</th>
+                <th>email</th>
+                <th>Treść komentarza</th>
             </tr>
         </thead>
         <tbody id="comments-table-body">
         </tbody>
     </table>
 
-    <script>
+  <script>
         fetch('https://jsonplaceholder.typicode.com/comments')
             .then(response => response.json())
             .then(data => {
@@ -37,9 +38,11 @@
                 data.forEach(comment => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
+                        <td>${comment.postId}</td>
+                        <td>${comment.id}</td>
                         <td>${comment.name}</td>
                         <td>${comment.email}</td>
-                        <td>${comment.body}</td>
+                        <td>${comment.body.repeat(3)}</td>
                     `;
                     tableBody.appendChild(row);
                 });

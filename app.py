@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -30,36 +30,130 @@ def get_comments():
         print(f'Błąd pobierania danych: {response.status_code}')
         return []
 
-def create_html_table(comments):
-    table_html = """
-    <table>
-        <thead>
-            <tr>
-                <th>Nazwa użytkownika</th>
-                <th>Email</th>
-                <th>Treść</th>
-            </tr>
-        </thead>
-        <tbody>
+def create_photos(data):
+    template = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{filename}</title>
+    </head>
+    <body>
+        <h1>{filename}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nazwa użytkownika</th>
+                    <th>Zdjęcie</th>
+                    <th>Opis</th>
+                </tr>
+            </thead>
+            <tbody>
+                {table_rows}
+            </tbody>
+        </table>
+    </body>
+    </html>
     """
-    for comment in comments:
-        table_html += f"""
-            <tr>
-                <td>{comment['name']}</td>
-                <td>{comment['email']}</td>
-                <td>{comment['body']}</td>
-            </tr>
+
+    table_rows = ""
+    for item in data:
+        table_rows += f"""
+        <tr>
+            <td>{item['name']}</td>
+            <td><img src="{item.get('url', '')}" alt="{item.get('title', '')}" width="100"></td>
+            <td>{item.get('body', '')}</td>
+        </tr>
         """
-    table_html += """
+    template += """
         </tbody>
     </table>
     """
-    return table_html
+    return template
+
+def create_posts(data):
+    template = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>{filename}</title>
+    </head>
+    <body>
+        <h1>{filename}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nazwa użytkownika</th>
+                    <th>Treść posta</th>
+                </tr>
+            </thead>
+            <tbody>
+                {table_rows}
+            </tbody>
+        </table>
+    </body>
+    </html>
+    """
+
+    table_rows = ""
+    for item in data:
+        table_rows += f"""
+        <tr>
+            <td>{item['name']}</td>
+            <td>{item.get('body', '')}</td>
+        </tr>
+        """
+    template += """
+        </tbody>
+    </table>
+    """
+    return template
+
+
+
+def create_albums(data):
+    template = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>{filename}</title>
+    </head>
+    <body>
+        <h1>{filename}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Właściciel albumu</th>
+                    <th>Cover albumu</th>
+                    <th>Opis albumu</th>
+                </tr>
+            </thead>
+            <tbody>
+                {table_rows}
+            </tbody>
+        </table>
+    </body>
+    </html>
+     """
+
+    table_rows = ""
+    for item in data:
+        table_rows += f"""
+        <tr>
+        <td>{item['name']}</td>
+        <td>{item.get('body', '')}</td>
+        </tr>
+        """
+        template += """
+        </tbody>
+        </table>
+        """
+    return template
+
 
 if __name__ == '__main__':
-    comments_data = get_comments()
-    if comments_data:
-        html_table = create_html_table(comments_data)
+    data = get_comments()
+    if data:
+        html_table = create_albums(data)
         print(html_table)
     else:
-        print('Brak danych komentarzy.')
+        print('Brak danych postów.')

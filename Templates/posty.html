@@ -14,12 +14,17 @@
             padding: 8px;
             text-align: left;
         }
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
     </style>
 </head>
 <body>
     <table>
         <thead>
             <tr>
+                <th>User id</th>
                 <th>Nazwa użytkownika</th>
                 <th>Treść postu</th>
             </tr>
@@ -28,15 +33,17 @@
         </tbody>
     </table>
 
-    <script>
-        fetch('https://jsonplaceholder.typicode.com/comments')
+  <script>
+        fetch('https://jsonplaceholder.typicode.com/posts')
             .then(response => response.json())
             .then(data => {
                 const tableBody = document.getElementById('comments-table-body');
                 data.forEach(comment => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${comment.name}</td>
+                        <td>${comment.id}</td>
+                        <td>${comment.userId}</td>
+                        <td>${comment.title}</td>
                         <td>${comment.body}</td>
                     `;
                     tableBody.appendChild(row);
