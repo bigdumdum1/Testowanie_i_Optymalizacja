@@ -1,6 +1,6 @@
 import unittest
 from app import app, create_html_table
-
+#7/12 testów
 class TestApp(unittest.TestCase):
     maxDiff = None
     def setUp(self):
