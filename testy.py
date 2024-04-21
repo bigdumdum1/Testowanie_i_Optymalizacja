@@ -61,6 +61,37 @@ class TestApp(unittest.TestCase):
         self.assertIn(b'Nazwa uzytkownika', response.data)
         self.assertIn(b'Tresc postu', response.data)
 
+    def test_create_albums_empty_data(self):
+        # Testowanie funkcji create_albums() z pustymi danymi wejściowymi
+        data = []
+        html_template = create_albums(data)
+        expected_html = """
+        <!DOCTYPE html>
+    <html>
+    <head>
+    <title>{filename}</title>
+    </head>
+    <body>
+        <h1>{filename}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Właściciel albumu</th>
+                    <th>Cover albumu</th>
+                    <th>Opis albumu</th>
+                </tr>
+            </thead>
+            <tbody>
+                {table_rows}
+            </tbody>
+        </table>
+    </body>
+    </html>
+        """
+        self.assertEqual(html_template.strip(), expected_html.strip())
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
