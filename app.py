@@ -157,3 +157,5 @@ if __name__ == '__main__':
         print(html_table)
     else:
         print('Brak danych postów.')
+
+print(coverage.report)
