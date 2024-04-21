@@ -158,4 +158,3 @@ if __name__ == '__main__':
     else:
         print('Brak danych postów.')
 
-print(coverage.report)
