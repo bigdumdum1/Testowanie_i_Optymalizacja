@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from app import app, get_comments, create_photos, create_posts, create_albums
-
+from io import StringIO
 
 class TestApp(unittest.TestCase):
 
@@ -89,6 +89,15 @@ class TestApp(unittest.TestCase):
     </html>
         """
         self.assertEqual(html_template.strip(), expected_html.strip())
+
+
+
+    def test_create_photos_without_data(self):
+        # Testowanie funkcji create_photos() bez danych wejściowych
+        data = []
+
+        # Wywołanie funkcji
+        html_template = create_photos(data)
 
 
 
