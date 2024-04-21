@@ -10,7 +10,7 @@ class TestApp(unittest.TestCase):
 
 
     def test_index_links(self):
-        # Testowanie linku do komentarzy
+        # Testowanie linków
         response = self.app.get('/')
         decoded_response = response.data.decode('utf-8')
         self.assertIn('<a href="komentarze"><button class="large-button"> Komentarze</button></a>', decoded_response)
@@ -35,6 +35,7 @@ class TestApp(unittest.TestCase):
         response = self.app.get('/albumy')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Id', response.data)
+        self.assertIn(b'Tytul', response.data)
 
     def test_index(self):
         with app.test_client() as client:
@@ -47,7 +48,10 @@ class TestApp(unittest.TestCase):
         with app.test_client() as client:
             response = client.get('/komentarze')
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'<title>Komentarze</title>', response.data)
+            self.assertIn(b'id', response.data)
+            self.assertIn(b'Nazwa uzytkownika', response.data)
+            self.assertIn(b'email', response.data)
+            self.assertIn(b'Tresc komentarza', response.data)
 
     def test_posty_route(self):
         # Testowanie poprawności ścieżki postów
