@@ -6,7 +6,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+background-image: url("https://wallpapers.com/images/hd/gray-gradient-background-j4haxao9g3tzuyoe.jpg");
 }
 
 .button-container {
@@ -16,12 +16,65 @@ body {
 }
 
 .large-button {
+    width:500px;
     padding: 10px 20px;
     font-size: 50px;
-    background-color: #0074D9;
-    color: #ffffff;
+    background: radial-gradient(circle, rgba(74,75,79,1) 0%, rgba(46,43,44,1) 100%);
+    color: #F8F8FF;
     border: none;
     border-radius: 5px;
-    margin: 0 10px;
+    margin: 0 100px;
     cursor: pointer;
+    margin-top: 60px;
+}
+
+.large-button:hover {
+    color: #F8F8FF;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align-last: center;
+    color: #dddddd;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+nav {
+    padding: 0;
+    width: 99%;
+    background: radial-gradient(circle, rgba(46,47,50,1) 0%, rgba(33,30,31,1) 100%);
+    margin-bottom:15%;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+ nav ul li {
+     margin-right: 20px;
+     transition: background-color 0.3s, color 0.3s;
+ }
+
+nav ul li:hover {
+    background-color: rgba(74, 75, 79, 1);
+    cursor: pointer;
+    color: white;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
 }

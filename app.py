@@ -158,3 +158,5 @@ if __name__ == '__main__':
     else:
         print('Brak danych postów.')
 
+#coverage run -m unittest testy.py
+#coverage report -m

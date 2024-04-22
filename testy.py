@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 from app import app, get_comments, create_photos, create_posts, create_albums
 from io import StringIO
-
+import coverage
 class TestApp(unittest.TestCase):
 
     def setUp(self):
