@@ -3,6 +3,8 @@ from unittest.mock import patch, MagicMock
 from app import app, get_comments, create_photos, create_posts, create_albums
 from io import StringIO
 import coverage
+import requests
+import pytest
 class TestApp(unittest.TestCase):
 
     def setUp(self):
@@ -96,7 +98,7 @@ class TestApp(unittest.TestCase):
         # Testowanie funkcji create_photos() bez danych wejściowych
         data = []
 
-        # Wywołanie funkcji
+    # Wywołanie funkcji
         html_template = create_photos(data)
 
 
