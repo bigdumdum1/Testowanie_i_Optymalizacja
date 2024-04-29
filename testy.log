@@ -27,3 +27,8 @@
 20352 : INFO : 29-Apr-24 21:30:10 127.0.0.1 - - [29/Apr/2024 21:30:10] "GET /komentarze HTTP/1.1" 200 -
 20352 : INFO : 29-Apr-24 21:30:21 127.0.0.1 - - [29/Apr/2024 21:30:21] "GET /zdjecia HTTP/1.1" 200 -
 20352 : INFO : 29-Apr-24 21:30:35 127.0.0.1 - - [29/Apr/2024 21:30:35] "GET /albumy HTTP/1.1" 200 -
+21472 : DEBUG : 29-Apr-24 21:35:13 Omg super zdebugowało się!
+21472 : INFO : 29-Apr-24 21:35:13 Aplikacja wystartowała
+21472 : WARNING : 29-Apr-24 21:35:13 To jest achtung.
+21472 : ERROR : 29-Apr-24 21:35:13 ERROR! ERROR! ERROR!
+21472 : CRITICAL : 29-Apr-24 21:35:13 CRIIITICAL! CRIIITICAL! CRIIITICAL!
