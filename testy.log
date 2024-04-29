@@ -1,0 +1,29 @@
+16256 : DEBUG : 29-Apr-24 21:20:43 Omg super zdebugowało się!
+16256 : INFO : 29-Apr-24 21:20:43 Aplikacja wystartowała
+16256 : WARNING : 29-Apr-24 21:20:43 To jest achtung.
+16256 : ERROR : 29-Apr-24 21:20:43 ERROR! ERROR! ERROR!
+16256 : CRITICAL : 29-Apr-24 21:20:43 CRIIITICAL! CRIIITICAL! CRIIITICAL!
+16256 : INFO : 29-Apr-24 21:20:43 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+16256 : INFO : 29-Apr-24 21:20:43 [33mPress CTRL+C to quit[0m
+17656 : DEBUG : 29-Apr-24 21:28:28 Omg super zdebugowało się!
+17656 : INFO : 29-Apr-24 21:28:28 Aplikacja wystartowała
+17656 : WARNING : 29-Apr-24 21:28:28 To jest achtung.
+17656 : ERROR : 29-Apr-24 21:28:28 ERROR! ERROR! ERROR!
+17656 : CRITICAL : 29-Apr-24 21:28:28 CRIIITICAL! CRIIITICAL! CRIIITICAL!
+17656 : INFO : 29-Apr-24 21:28:28 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+17656 : INFO : 29-Apr-24 21:28:28 [33mPress CTRL+C to quit[0m
+20352 : DEBUG : 29-Apr-24 21:29:29 Omg super zdebugowało się!
+20352 : INFO : 29-Apr-24 21:29:29 Aplikacja wystartowała
+20352 : WARNING : 29-Apr-24 21:29:29 To jest achtung.
+20352 : ERROR : 29-Apr-24 21:29:29 ERROR! ERROR! ERROR!
+20352 : CRITICAL : 29-Apr-24 21:29:29 CRIIITICAL! CRIIITICAL! CRIIITICAL!
+20352 : INFO : 29-Apr-24 21:29:29 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+20352 : INFO : 29-Apr-24 21:29:29 [33mPress CTRL+C to quit[0m
+20352 : INFO : 29-Apr-24 21:29:59 127.0.0.1 - - [29/Apr/2024 21:29:59] "GET / HTTP/1.1" 200 -
+20352 : INFO : 29-Apr-24 21:29:59 127.0.0.1 - - [29/Apr/2024 21:29:59] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+20352 : INFO : 29-Apr-24 21:30:10 127.0.0.1 - - [29/Apr/2024 21:30:10] "GET /komentarze HTTP/1.1" 200 -
+20352 : INFO : 29-Apr-24 21:30:21 127.0.0.1 - - [29/Apr/2024 21:30:21] "GET /zdjecia HTTP/1.1" 200 -
+20352 : INFO : 29-Apr-24 21:30:35 127.0.0.1 - - [29/Apr/2024 21:30:35] "GET /albumy HTTP/1.1" 200 -

@@ -5,141 +5,95 @@ from io import StringIO
 import coverage
 import requests
 import pytest
-import logging
 
-logging.basicConfig(filename='testy.log', level=logging.ERROR)
 class TestApp(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
 
-
     def test_index_links(self):
-        try:
-            # Testowanie linków
-            response = self.app.get('/')
-            decoded_response = response.data.decode('utf-8')
-            self.assertIn('<a href="komentarze"><button class="large-button"> Komentarze</button></a>', decoded_response)
-            # Testowanie linku do zdjęć
-            self.assertIn('<a href="zdjecia"><button class="large-button">Zdjęcia</button></a>', decoded_response)
-            # Testowanie linku do albumów
-            self.assertIn('<a href="albumy"><button class="large-button">Albumy</button></a>', decoded_response)
-            # Testowanie linku do postów
-            self.assertIn('<a href="posty"><button class="large-button">Posty</button></a>', decoded_response)
-
-            logging.error("Wystąpił błąd w teście")
-        except Exception as e:
-            logging.exception(f"Wystąpił wyjątek: {e}")
+        # Testowanie linków
+        response = self.app.get('/')
+        decoded_response = response.data.decode('utf-8')
+        self.assertIn('<a href="komentarze"><button class="large-button"> Komentarze</button></a>', decoded_response)
+        # Testowanie linku do zdjęć
+        self.assertIn('<a href="zdjecia"><button class="large-button">Zdjęcia</button></a>', decoded_response)
+        # Testowanie linku do albumów
+        self.assertIn('<a href="albumy"><button class="large-button">Albumy</button></a>', decoded_response)
+        # Testowanie linku do postów
+        self.assertIn('<a href="posty"><button class="large-button">Posty</button></a>', decoded_response)
     def test_komentarze_route(self):
-        try:
-                # Testowanie poprawności ścieżki komentarzy
-            response = self.app.get('/komentarze')
+        # Testowanie poprawności ścieżki komentarzy
+        response = self.app.get('/komentarze')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'id', response.data)
+        self.assertIn(b'Nazwa uzytkownika', response.data)
+        self.assertIn(b'email', response.data)
+        self.assertIn(b'Tresc komentarza', response.data)
+
+    def test_albumy_route(self):
+        # Testowanie poprawności ścieżki albumów
+        response = self.app.get('/albumy')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Id', response.data)
+        self.assertIn(b'Tytul', response.data)
+
+    def test_index(self):
+        with app.test_client() as client:
+            response = client.get('/')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'<title>Index</title>', response.data)
+
+    # Test dla funkcji komentarze() czy się otwiera
+    def test_komentarze(self):
+        with app.test_client() as client:
+            response = client.get('/komentarze')
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'id', response.data)
             self.assertIn(b'Nazwa uzytkownika', response.data)
             self.assertIn(b'email', response.data)
             self.assertIn(b'Tresc komentarza', response.data)
 
-            logging.error("Wystąpił błąd w teście")
-        except Exception as e:
-            logging.exception(f"Wystąpił wyjątek: {e}")
-
-    def test_albumy_route(self):
-        try:
-                # Testowanie poprawności ścieżki albumów
-            response = self.app.get('/albumy')
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Id', response.data)
-            self.assertIn(b'Tytul', response.data)
-
-            logging.error("Wystąpił błąd w teście")
-        except Exception as e:
-            logging.exception(f"Wystąpił wyjątek: {e}")
-
-    def test_index(self):
-        try:
-            with app.test_client() as client:
-                response = client.get('/')
-                self.assertEqual(response.status_code, 200)
-                self.assertIn(b'<title>Index</title>', response.data)
-
-            logging.error("Wystąpił błąd w teście")
-        except Exception as e:
-            logging.exception(f"Wystąpił wyjątek: {e}")
-
-    # Test dla funkcji komentarze() czy się otwiera
-    def test_komentarze(self):
-        try:
-            with app.test_client() as client:
-                response = client.get('/komentarze')
-                self.assertEqual(response.status_code, 200)
-                self.assertIn(b'id', response.data)
-                self.assertIn(b'Nazwa uzytkownika', response.data)
-                self.assertIn(b'email', response.data)
-                self.assertIn(b'Tresc komentarza', response.data)
-
-            logging.error("Wystąpił błąd w teście")
-        except Exception as e:
-            logging.exception(f"Wystąpił wyjątek: {e}")
-
     def test_posty_route(self):
-        try:
-            # Testowanie poprawności ścieżki postów
-            response = self.app.get('/posty')
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b'User id', response.data)
-            self.assertIn(b'Nazwa uzytkownika', response.data)
-            self.assertIn(b'Tresc postu', response.data)
-
-            logging.error("Wystąpił błąd w teście")
-        except Exception as e:
-            logging.exception(f"Wystąpił wyjątek: {e}")
-
+        # Testowanie poprawności ścieżki postów
+        response = self.app.get('/posty')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'User id', response.data)
+        self.assertIn(b'Nazwa uzytkownika', response.data)
+        self.assertIn(b'Tresc postu', response.data)
     def test_create_albums_empty_data(self):
-        try:
-            # Testowanie funkcji create_albums() z pustymi danymi wejściowymi
-            data = []
-            html_template = create_albums(data)
-            expected_html = """
-            <!DOCTYPE html>
-        <html>
-        <head>
-        <title>{filename}</title>
-        </head>
-        <body>
-            <h1>{filename}</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Właściciel albumu</th>
-                        <th>Cover albumu</th>
-                        <th>Opis albumu</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {table_rows}
-                </tbody>
-            </table>
-        </body>
-        </html>
-            """
-            self.assertEqual(html_template.strip(), expected_html.strip())
-
-            logging.error("Wystąpił błąd w teście")
-        except Exception as e:
-            logging.exception(f"Wystąpił wyjątek: {e}")
-
+        # Testowanie funkcji create_albums() z pustymi danymi wejściowymi
+        data = []
+        html_template = create_albums(data)
+        expected_html = """
+        <!DOCTYPE html>
+    <html>
+    <head>
+    <title>{filename}</title>
+    </head>
+    <body>
+        <h1>{filename}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Właściciel albumu</th>
+                    <th>Cover albumu</th>
+                    <th>Opis albumu</th>
+                </tr>
+            </thead>
+            <tbody>
+                {table_rows}
+            </tbody>
+        </table>
+    </body>
+    </html>
+        """
+        self.assertEqual(html_template.strip(), expected_html.strip())
 
 
     def test_create_photos_without_data(self):
-        try:
-            data = []
+        data = []
 
-            html_template = create_photos(data)
-
-            logging.error("Wystąpił błąd w teście")
-        except Exception as e:
-            logging.exception(f"Wystąpił wyjątek: {e}")
-
+        html_template = create_photos(data)
 
 
 
