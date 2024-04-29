@@ -1,1 +1,0 @@
-# Testowanie_i_Optymalizacja
