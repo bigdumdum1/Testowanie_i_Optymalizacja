@@ -26,6 +26,7 @@ th, td {
 img {
     max-width: 100px;
     max-height: 100px;
+    cursor: pointer;
 }
     </style>
 </head>
@@ -42,7 +43,7 @@ img {
         </tbody>
     </table>
 
-    <script>
+        <script>
         fetch('https://jsonplaceholder.typicode.com/photos')
             .then(response => response.json())
             .then(data => {
@@ -52,7 +53,7 @@ img {
                     row.innerHTML = `
                         <td>${item.id}</td>
                         <td>${item.title}</td>
-                        <td><img src="${item.url}" alt="${item.title}"></td>
+                        <td><a href="${item.url}" target="_blank"><img src="${item.url}" alt="${item.title}"></a></td>
                     `;
                     tableBody.appendChild(row);
                 });
