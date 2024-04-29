@@ -6,11 +6,11 @@ app = Flask(__name__)
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='testy.log', encoding='utf-8', level=logging.DEBUG, format='%(process)s : %(levelname)s : %(asctime)s %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
-logging.debug('Omg super zdebugowało się!')
-logging.info('Aplikacja wystartowała')
-logging.warning('To jest achtung.')
-logging.error('ERROR! ERROR! ERROR!')
-logging.critical('CRIIITICAL! CRIIITICAL! CRIIITICAL!')
+logging.debug('Brak błędów!')
+logging.info('To jest informacja.')
+logging.warning('Uwaga!')
+logging.error('Błąd!')
+logging.critical('Bład krytyczny!')
 
 @app.route('/')
 def index():
