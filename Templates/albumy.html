@@ -4,60 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Albumy</title>
-     <style>
+    <style>
         body {
-    font-family: Arial, sans-serif;
-    flex-direction: column;
-    align-items: center;
-background-image: url("https://wallpapers.com/images/hd/gray-gradient-background-j4haxao9g3tzuyoe.jpg");
-}
+            color: #dddddd;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+            align-items: center;
+            background-image: url("https://wallpapers.com/images/hd/gray-gradient-background-j4haxao9g3tzuyoe.jpg");
+        }
 
-     table {
-    border-collapse: collapse;
-    width: 100%;
-}
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-th, td {
-    text-align-last: center;
-    color: #dddddd;
-    border: 1px solid #ddd;
-}
+        th, td {
+            text-align-last: center;
+            color: #dddddd;
+            border: 1px solid #ddd;
+        }
 
-img {
-    max-width: 100px;
-    max-height: 100px;
-}
-.szukaj {
-    text-align: center;
-    margin: 20px 0;
-}
-.szukaj h1{
-color: #dddddd;
-}
-.szukaj input{
-    color: #dddddd;
-    background-color: black;
-    width: 300px;
-    height: 30px;
-}
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .szukaj {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .szukaj h1 {
+            color: #dddddd;
+        }
+
+        .szukaj input {
+            color: #dddddd;
+            background-color: black;
+            width: 300px;
+            height: 30px;
+        }
+
+        .album-details {
+            display: none;
+        }
     </style>
 </head>
 <body>
 <div class="szukaj">
-<h1> Wyszukiwarka słów</h1>
-<input type="text" id="searchInput" placeholder="Wyszukaj słowo">
+    <h1>Wyszukiwarka słów</h1>
+    <input type="text" id="searchInput" placeholder="Wyszukaj słowo">
 </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Id albumu</th>
-                <th>Tytul</th>
-            </tr>
-        </thead>
-        <tbody id="comments-table-body">
-        </tbody>
-    </table>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Id albumu</th>
+        <th>Tytul</th>
+    </tr>
+    </thead>
+    <tbody id="comments-table-body">
+    </tbody>
+</table>
+
+<div class="album-details">
+    <h2>Wybrane zdjęcia z albumu:</h2>
+    <ul id="album-photos"></ul>
+</div>
 
 <script>
     fetch('https://jsonplaceholder.typicode.com/albums')
@@ -69,9 +82,31 @@ color: #dddddd;
                 row.innerHTML = `
                         <td>${item.id}</td>
                         <td>${item.userId}</td>
-                        <td>${item.title}</td>
+                        <td class="album-title">${item.title}</td>
                     `;
                 tableBody.appendChild(row);
+            });
+
+            const albumTitleCells = document.querySelectorAll('.album-title');
+            const albumDetails = document.querySelector('.album-details');
+            const albumPhotosList = document.getElementById('album-photos');
+
+            albumTitleCells.forEach(cell => {
+                cell.addEventListener('click', () => {
+                    const albumId = cell.parentElement.querySelector('td:nth-child(2)').textContent;
+                    fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
+                        .then(response => response.json())
+                        .then(photos => {
+                            albumPhotosList.innerHTML = '';
+                            photos.forEach(photo => {
+                                const li = document.createElement('li');
+                                li.textContent = photo.title;
+                                albumPhotosList.appendChild(li);
+                            });
+                            albumDetails.style.display = 'block';
+                        })
+                        .catch(error => console.error('Błąd pobierania zdjęć:', error));
+                });
             });
 
             // JavaScript code for handling word search
