@@ -78,35 +78,42 @@ img {
 
 
       //Nowy kod
-      document.getElementById('searchForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Zapobiegamy domyślnej akcji przesyłania formularza
+      // Symulacja danych o postach
+    var fakeData = [
+      { postId: 1, userId: 1, userName: 'John', content: 'Treść posta 1' },
+      { postId: 2, userId: 2, userName: 'Jane', content: 'Treść posta 2' },
+      // Dodaj więcej danych symulacyjnych...
+    ];
 
-      // Pobieramy wartości z formularza
-      var minChars = document.getElementById('minChars').value;
-      var maxChars = document.getElementById('maxChars').value;
-
-      // Wyślij zapytanie do backendu
-      // Tutaj należy umieścić kod wysyłający żądanie do backendu, np. za pomocą Fetch API lub biblioteki Axios
-
-      // Symulujemy odbiór danych z backendu
-      var fakeData = [
-        { id: 1, title: 'Post 1', content: 'Treść posta 1' },
-        { id: 2, title: 'Post 2', content: 'Treść posta 2' },
-      ];
-
-      // Filtrowanie wyników po stronie klienta
-      var filteredResults = fakeData.filter(function(post) {
+    // Funkcja do filtrowania postów
+    function filterPosts(minChars, maxChars) {
+      return fakeData.filter(function(post) {
         var postLength = post.content.length;
         return postLength >= minChars && (!maxChars || postLength <= maxChars);
       });
+    }
 
-      // Wyświetlenie wyników wyszukiwania
+    // Obsługa zdarzenia wysłania formularza
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Zapobiegamy domyślnej akcji przesyłania formularza
+
+      // Pobieramy wartości z formularza
+      var minChars = parseInt(document.getElementById('minChars').value);
+      var maxChars = parseInt(document.getElementById('maxChars').value);
+
+      // Filtrowanie wyników
+      var filteredResults = filterPosts(minChars, maxChars);
+
+      // Wyświetlanie wyników wyszukiwania
       var searchResultsContainer = document.getElementById('searchResults');
       searchResultsContainer.innerHTML = ''; // Wyczyszczenie poprzednich wyników
       if (filteredResults.length > 0) {
         filteredResults.forEach(function(post) {
           var postElement = document.createElement('div');
-          postElement.innerHTML = '<h3>' + post.title + '</h3><p>' + post.content + '</p>';
+          postElement.innerHTML = '<p><strong>ID posta:</strong> ' + post.postId + '</p>' +
+                                  '<p><strong>ID użytkownika:</strong> ' + post.userId + '</p>' +
+                                  '<p><strong>Nazwa użytkownika:</strong> ' + post.userName + '</p>' +
+                                  '<p><strong>Treść postu:</strong> ' + post.content + '</p>';
           searchResultsContainer.appendChild(postElement);
         });
       } else {
