@@ -43,6 +43,19 @@ img {
         </tbody>
     </table>
 
+
+    <!-- Nowy kod -->
+    <form id="searchForm">
+        <label for="minChars">Minimalna liczba znaków:</label>
+        <input type="number" id="minChars" name="minChars" min="0" value="0">
+        <label for="maxChars">Maksymalna liczba znaków:</label>
+        <input type="number" id="maxChars" name="maxChars" min="0">
+        <button type="submit">Szukaj</button>
+    </form>
+    <div id="searchResults">
+
+    </div>
+    <!-- Nowy kod -->
   <script>
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(response => response.json())
@@ -60,6 +73,47 @@ img {
                 });
             })
             .catch(error => console.error('Błąd pobierania danych:', error));
+
+
+
+
+      //Nowy kod
+      document.getElementById('searchForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Zapobiegamy domyślnej akcji przesyłania formularza
+
+      // Pobieramy wartości z formularza
+      var minChars = document.getElementById('minChars').value;
+      var maxChars = document.getElementById('maxChars').value;
+
+      // Wyślij zapytanie do backendu
+      // Tutaj należy umieścić kod wysyłający żądanie do backendu, np. za pomocą Fetch API lub biblioteki Axios
+
+      // Symulujemy odbiór danych z backendu
+      var fakeData = [
+        { id: 1, title: 'Post 1', content: 'Treść posta 1' },
+        { id: 2, title: 'Post 2', content: 'Treść posta 2' },
+      ];
+
+      // Filtrowanie wyników po stronie klienta
+      var filteredResults = fakeData.filter(function(post) {
+        var postLength = post.content.length;
+        return postLength >= minChars && (!maxChars || postLength <= maxChars);
+      });
+
+      // Wyświetlenie wyników wyszukiwania
+      var searchResultsContainer = document.getElementById('searchResults');
+      searchResultsContainer.innerHTML = ''; // Wyczyszczenie poprzednich wyników
+      if (filteredResults.length > 0) {
+        filteredResults.forEach(function(post) {
+          var postElement = document.createElement('div');
+          postElement.innerHTML = '<h3>' + post.title + '</h3><p>' + post.content + '</p>';
+          searchResultsContainer.appendChild(postElement);
+        });
+      } else {
+        searchResultsContainer.innerHTML = '<p>Brak wyników wyszukiwania.</p>';
+      }
+    });
+      //Nowy kod
     </script>
 </body>
 </html>
