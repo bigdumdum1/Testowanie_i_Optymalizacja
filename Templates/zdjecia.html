@@ -28,9 +28,26 @@ img {
     max-height: 100px;
     cursor: pointer;
 }
+.szukaj {
+    text-align: center;
+    margin: 20px 0;
+}
+.szukaj h1{
+color: #dddddd;
+}
+.szukaj input{
+    color: #dddddd;
+    background-color: black;
+    width: 300px;
+    height: 30px;
+}
     </style>
 </head>
 <body>
+<div class="szukaj">
+<h1> Wyszukiwarka słów</h1>
+<input type="text" id="searchInput" placeholder="Wyszukaj tytuł...">
+</div>
     <table>
         <thead>
             <tr>
@@ -43,11 +60,13 @@ img {
         </tbody>
     </table>
 
-        <script>
+            <script>
         fetch('https://jsonplaceholder.typicode.com/photos')
             .then(response => response.json())
             .then(data => {
                 const tableBody = document.getElementById('comments-table-body');
+                const searchInput = document.getElementById('searchInput');
+
                 data.forEach(item => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
@@ -56,6 +75,21 @@ img {
                         <td><a href="${item.url}" target="_blank"><img src="${item.url}" alt="${item.title}"></a></td>
                     `;
                     tableBody.appendChild(row);
+                });
+
+                // Obsługa wyszukiwania
+                searchInput.addEventListener('input', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const rows = tableBody.getElementsByTagName('tr');
+
+                    for (const row of rows) {
+                        const title = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                        if (title.includes(searchTerm)) {
+                            row.style.display = 'table-row';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
                 });
             })
             .catch(error => console.error('Błąd pobierania danych:', error));
