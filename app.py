@@ -1,6 +1,16 @@
 from flask import Flask, request, render_template
+import logging
 
 app = Flask(__name__)
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='testy.log', encoding='utf-8', level=logging.DEBUG, format='%(process)s : %(levelname)s : %(asctime)s %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+
+logging.debug('Brak błędów!')
+logging.info('To jest informacja.')
+logging.warning('Uwaga!')
+logging.error('Błąd!')
+logging.critical('Bład krytyczny!')
 
 @app.route('/')
 def index():
@@ -23,11 +33,15 @@ def posty():
     return render_template('posty.html')
 def get_comments():
     url = 'https://jsonplaceholder.typicode.com/comments'
-    response = request.get(url)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        print(f'Błąd pobierania danych: {response.status_code}')
+    try:
+        response = request.get(url)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            logger.error(f'Błąd pobierania danych: {response.status_code}')
+            return []
+    except Exception as e:
+        logger.exception(f'Wystąpił wyjątek przy pobieraniu danych: {e}')
         return []
 
 def create_photos(data):

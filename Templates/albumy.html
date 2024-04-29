@@ -100,7 +100,11 @@
                             albumPhotosList.innerHTML = '';
                             photos.forEach(photo => {
                                 const li = document.createElement('li');
-                                li.textContent = photo.title;
+                                const img = document.createElement('img');
+                                img.src = photo.url;
+                                img.alt = photo.title;
+                                img.addEventListener('click', () => window.open(photo.url, '_blank'));
+                                li.appendChild(img);
                                 albumPhotosList.appendChild(li);
                             });
                             albumDetails.style.display = 'block';
