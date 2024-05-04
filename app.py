@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template
 import logging
-from locust import HttpUser, task, between
 
 app = Flask(__name__)
 
@@ -173,26 +172,5 @@ if __name__ == '__main__':
     else:
         print('Brak danych postów.')
 
-class WebsiteUser(HttpUser):
-
-    wait_time = between(1, 5)
-    @task
-    def view_homepage(self):
-        self.client.get("/")
-    @task
-    def view_albums(self):
-        self.client.get("/albumy")
-
-    @task
-    def view_comments(self):
-        self.client.get("/komentarze")
-
-    @task
-    def view_posts(self):
-        self.client.get("/posty")
-
-    @task
-    def view_images(self):
-        self.client.get("/zdjecia")
 #coverage run -m unittest testy.py
 #coverage report -m
