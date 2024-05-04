@@ -5,6 +5,7 @@ from io import StringIO
 import coverage
 import requests
 import pytest
+from locust import HttpUser, task, between
 
 class TestApp(unittest.TestCase):
     def setUp(self):
@@ -94,8 +95,27 @@ class TestApp(unittest.TestCase):
         data = []
 
         html_template = create_photos(data)
+class WebsiteUser(HttpUser):
 
+    wait_time = between(1, 5)
+    @task
+    def view_homepage(self):
+        self.client.get("/")
+    @task
+    def view_albums(self):
+        self.client.get("/albumy")
 
+    @task
+    def view_comments(self):
+        self.client.get("/komentarze")
+
+    @task
+    def view_posts(self):
+        self.client.get("/posty")
+
+    @task
+    def view_images(self):
+        self.client.get("/zdjecia")
 
 if __name__ == '__main__':
     unittest.main()
