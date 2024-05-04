@@ -84,3 +84,48 @@
 14152 : INFO : 29-Apr-24 21:57:11 127.0.0.1 - - [29/Apr/2024 21:57:11] "GET / HTTP/1.1" 200 -
 14152 : INFO : 29-Apr-24 21:57:11 127.0.0.1 - - [29/Apr/2024 21:57:11] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
 14152 : INFO : 29-Apr-24 21:57:13 127.0.0.1 - - [29/Apr/2024 21:57:13] "GET /albumy HTTP/1.1" 200 -
+22268 : DEBUG : 29-Apr-24 22:01:16 Brak błędów!
+22268 : INFO : 29-Apr-24 22:01:16 To jest informacja.
+22268 : WARNING : 29-Apr-24 22:01:16 Uwaga!
+22268 : ERROR : 29-Apr-24 22:01:16 Błąd!
+22268 : CRITICAL : 29-Apr-24 22:01:16 Bład krytyczny!
+22268 : INFO : 29-Apr-24 22:01:16 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+22268 : INFO : 29-Apr-24 22:01:16 [33mPress CTRL+C to quit[0m
+22268 : INFO : 29-Apr-24 22:01:22 127.0.0.1 - - [29/Apr/2024 22:01:22] "GET / HTTP/1.1" 200 -
+22268 : INFO : 29-Apr-24 22:01:22 127.0.0.1 - - [29/Apr/2024 22:01:22] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+22268 : INFO : 29-Apr-24 22:01:33 127.0.0.1 - - [29/Apr/2024 22:01:33] "GET /komentarze HTTP/1.1" 200 -
+22268 : INFO : 29-Apr-24 22:01:44 127.0.0.1 - - [29/Apr/2024 22:01:44] "GET /posty HTTP/1.1" 200 -
+22268 : INFO : 29-Apr-24 22:01:57 127.0.0.1 - - [29/Apr/2024 22:01:57] "GET /zdjecia HTTP/1.1" 200 -
+22268 : INFO : 29-Apr-24 22:02:10 127.0.0.1 - - [29/Apr/2024 22:02:10] "GET /albumy HTTP/1.1" 200 -
+8492 : DEBUG : 29-Apr-24 22:44:45 Brak błędów!
+8492 : INFO : 29-Apr-24 22:44:45 To jest informacja.
+8492 : WARNING : 29-Apr-24 22:44:45 Uwaga!
+8492 : ERROR : 29-Apr-24 22:44:45 Błąd!
+8492 : CRITICAL : 29-Apr-24 22:44:45 Bład krytyczny!
+8492 : INFO : 29-Apr-24 22:44:45 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+8492 : INFO : 29-Apr-24 22:44:45 [33mPress CTRL+C to quit[0m
+8492 : INFO : 29-Apr-24 22:44:51 127.0.0.1 - - [29/Apr/2024 22:44:51] "GET / HTTP/1.1" 200 -
+8492 : INFO : 29-Apr-24 22:44:51 127.0.0.1 - - [29/Apr/2024 22:44:51] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+8492 : INFO : 29-Apr-24 22:44:54 127.0.0.1 - - [29/Apr/2024 22:44:54] "GET /komentarze HTTP/1.1" 200 -
+6060 : DEBUG : 29-Apr-24 23:04:09 Brak błędów!
+6060 : INFO : 29-Apr-24 23:04:09 To jest informacja.
+6060 : WARNING : 29-Apr-24 23:04:09 Uwaga!
+6060 : ERROR : 29-Apr-24 23:04:09 Błąd!
+6060 : CRITICAL : 29-Apr-24 23:04:09 Bład krytyczny!
+6060 : INFO : 29-Apr-24 23:04:09 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+6060 : INFO : 29-Apr-24 23:04:09 [33mPress CTRL+C to quit[0m
+6652 : DEBUG : 29-Apr-24 23:04:40 Brak błędów!
+6652 : INFO : 29-Apr-24 23:04:40 To jest informacja.
+6652 : WARNING : 29-Apr-24 23:04:40 Uwaga!
+6652 : ERROR : 29-Apr-24 23:04:40 Błąd!
+6652 : CRITICAL : 29-Apr-24 23:04:40 Bład krytyczny!
+6652 : INFO : 29-Apr-24 23:04:40 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+6652 : INFO : 29-Apr-24 23:04:40 [33mPress CTRL+C to quit[0m
+6652 : INFO : 29-Apr-24 23:04:40 127.0.0.1 - - [29/Apr/2024 23:04:40] "GET / HTTP/1.1" 200 -
+6652 : INFO : 29-Apr-24 23:04:40 127.0.0.1 - - [29/Apr/2024 23:04:40] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+6652 : INFO : 29-Apr-24 23:04:49 127.0.0.1 - - [29/Apr/2024 23:04:49] "GET / HTTP/1.1" 200 -
+6652 : INFO : 29-Apr-24 23:04:49 127.0.0.1 - - [29/Apr/2024 23:04:49] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
