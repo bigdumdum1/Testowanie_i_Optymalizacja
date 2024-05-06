@@ -119,3 +119,5 @@ class WebsiteUser(HttpUser):
 
 if __name__ == '__main__':
     unittest.main()
+
+# locust -f testy.py
