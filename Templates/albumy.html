@@ -114,18 +114,19 @@
             });
 
             // JavaScript code for handling word search
-            const searchInput = document.getElementById('searchInput');
-            const tableRows = document.querySelectorAll('#comments-table-body tr');
+        const searchInput = document.getElementById('searchInput');
+        const tableRows = document.querySelectorAll('#comments-table-body tr');
 
-            searchInput.addEventListener('input', () => {
-                const searchTerm = searchInput.value.toLowerCase();
-                tableRows.forEach(row => {
-                    const albumTitle = row.querySelector('td:last-child').textContent.toLowerCase();
-                    row.style.display = albumTitle.includes(searchTerm) ? 'table-row' : 'none';
-                });
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            tableRows.forEach(row => {
+                const postText = row.querySelector('td:last-child').textContent.toLowerCase();
+                const postId = row.querySelector('td:first-child').textContent.toLowerCase(); // Get the post ID
+                row.style.display = postText.includes(searchTerm) || postId.includes(searchTerm) ? 'table-row' : 'none';
             });
-        })
-        .catch(error => console.error('Błąd pobierania danych:', error));
+        });
+    })
+    .catch(error => console.error('Błąd pobierania danych:', error));
 </script>
 </body>
 </html>

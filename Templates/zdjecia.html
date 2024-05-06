@@ -61,38 +61,39 @@ color: #dddddd;
     </table>
 
             <script>
-            fetch('https://jsonplaceholder.typicode.com/photos')
-            .then(response => response.json())
-            .then(data => {
-                const tableBody = document.getElementById('comments-table-body');
-                const searchInput = document.getElementById('searchInput');
+fetch('https://jsonplaceholder.typicode.com/photos')
+    .then(response => response.json())
+    .then(data => {
+        const tableBody = document.getElementById('comments-table-body');
+        const searchInput = document.getElementById('searchInput');
 
-                data.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.title}</td>
-                        <td><a href="${item.url}" target="_blank"><img src="${item.url}" alt="${item.title}"></a></td>
-                    `;
-                    tableBody.appendChild(row);
-                });
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.id}</td>
+                <td>${item.title}</td>
+                <td><a href="${item.url}" target="_blank"><img src="${item.url}" alt="${item.title}"></a></td>
+            `;
+            tableBody.appendChild(row);
+        });
 
-                // Obsługa wyszukiwania
-                searchInput.addEventListener('input', () => {
-                    const searchTerm = searchInput.value.toLowerCase();
-                    const rows = tableBody.getElementsByTagName('tr');
+        // JavaScript code for handling search
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const rows = tableBody.getElementsByTagName('tr');
 
-                    for (const row of rows) {
-                        const title = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                        if (title.includes(searchTerm)) {
-                            row.style.display = 'table-row';
-                        } else {
-                            row.style.display = 'none';
-                        }
-                    }
-                });
-            })
-            .catch(error => console.error('Błąd pobierania danych:', error));
+            for (const row of rows) {
+                const title = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const photoId = row.querySelector('td:first-child').textContent.toLowerCase(); // Get the photo ID
+                if (title.includes(searchTerm) || photoId.includes(searchTerm)) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        });
+    })
+    .catch(error => console.error('Błąd pobierania danych:', error));
     </script>
 </body>
 </html>
