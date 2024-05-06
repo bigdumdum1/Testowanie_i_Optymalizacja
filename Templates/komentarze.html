@@ -85,8 +85,11 @@ color: #dddddd;
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.toLowerCase();
                 tableRows.forEach(row => {
-                    const commentText = row.querySelector('td:last-child').textContent.toLowerCase();
-                    row.style.display = commentText.includes(searchTerm) ? 'table-row' : 'none';
+                    const postText = row.querySelector('td:last-child').textContent.toLowerCase();
+                    const postId = row.querySelector('td:first-child').textContent.toLowerCase(); // Get the post ID
+                    const username = row.querySelector('td:nth-child(3)').textContent.toLowerCase(); // Get the username
+                    const email = row.querySelector('td:nth-child(4)').textContent.toLowerCase(); // Get the email
+                    row.style.display = postText.includes(searchTerm) || postId.includes(searchTerm) || username.includes(searchTerm) || email.includes(searchTerm) ? 'table-row' : 'none';
                 });
             });
         })
